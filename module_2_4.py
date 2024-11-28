@@ -6,7 +6,7 @@ is_prime = True
 for number in range(2,len(numbers)):
     if number >1:
         for num in range(2,number):
-            if number % num ==0:
+            if number % num == 0:
                 not_primes.append(number)
                 break
         else:
