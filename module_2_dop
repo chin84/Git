@@ -1,0 +1,44 @@
+import random
+
+def get_number():
+    num = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+    numbers = list(range(3, 21))
+    number = random.choice(numbers)
+    return number
+
+def get_passwordcode(encoding_string):
+    passworddict = {}
+    passworddict.update({3: 12, 4: 13, 5: 1423, 6: 121524, 7: 162534, 8: 13172635, 9: 1218273645})
+    passworddict.update({10: 141923283746, 11: 11029384756, 12: 12131511124210394857, 13: 112211310495867})
+    passworddict.update({14: 1611325212343114105968, 15: 1214114232133124115106978})
+    passworddict.update({16: 1317115262143531341251161079, 17: 11621531441351261171089})
+    passworddict.update({18: 12151811724272163631545414513612711810, 19: 118217316415514613712811910})
+    passworddict.update({20: 13141911923282183731746416515614713812911})
+    passwordcode = passworddict.get(encoding_string)
+    return passwordcode
+
+encoding_string = get_number()
+
+print('Шифр   :', encoding_string)
+
+
+pairnum_first = list(range(1, encoding_string))
+pairnum_second = list(range(1, encoding_string))
+pairs = []
+result = ''
+
+for first_pair in pairnum_first:
+    for second_pair in pairnum_second:
+        pairs_first = first_pair
+        pairs_second= second_pair
+        if pairs_first >= pairs_second:
+            continue
+        else:
+            multiplicity = encoding_string % (pairs_first + pairs_second)
+            if multiplicity == 0:
+                pairs.append([pairs_first, pairs_second])
+                result = f"{result}{str(pairs_first)}{str(pairs_second)}"
+print('Пары чисел', *pairs)
+print(f"Вторая часть пароля {result}")
+if int(result) == get_passwordcode(encoding_string):
+    print(f'Вы разгадали шифр! Поздравляем!')
